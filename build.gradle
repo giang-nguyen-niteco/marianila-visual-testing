@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+}
+
+group 'se.niteco'
+version '1.0-SNAPSHOT'
+
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.2'
+    implementation group: 'com.typesafe', name: 'config', version: '1.3.4'
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
+    compile group: 'com.applitools', name: 'eyes-selenium-java3', version: '3.158.9'
+}
+
+tasks.withType(Test) {
+    systemProperty "file.encoding", "UTF-8"
+}
+
+test {
+    systemProperties project.properties.subMap(["env"])
+    useJUnitPlatform(
+    )
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
