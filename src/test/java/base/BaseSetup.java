@@ -25,6 +25,7 @@ public class BaseSetup {
     @AfterAll
     public static void tearDown() {
         driver.quit();
+        eyes.abortIfNotClosed();
     }
 
     private static void initiateEyes() {
